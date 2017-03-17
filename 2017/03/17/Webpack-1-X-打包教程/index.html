@@ -87,22 +87,16 @@
 
 
 
-<meta name="description" content="初始webpackWebpack是模块打包机、把你的项目当做一个整体，通过一个给定的主文件（如：main.js），Webpack将从这个文件开始找到你的项目的所有依赖文件，使用loaders处理它们，最后打包为浏览器可识别的资源（js.png.css等）
-运行环境1、npm2、node.js
-源码解析webpack.config.js12345678910111213141516171819202">
+<meta name="description" content="初始webpackWebpack是模块打包机、把你的项目当做一个整体，通过一个给定的主文件（如：main.js），Webpack将从这个文件开始找到你的项目的所有依赖文件，使用loaders处理它们，最后打包为浏览器可识别的资源（js.png.css等）">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Webpack 1.X 打包教程">
 <meta property="og:url" content="http://yoursite.com/2017/03/17/Webpack-1-X-打包教程/index.html">
 <meta property="og:site_name" content="QingHua5453 の Blog">
-<meta property="og:description" content="初始webpackWebpack是模块打包机、把你的项目当做一个整体，通过一个给定的主文件（如：main.js），Webpack将从这个文件开始找到你的项目的所有依赖文件，使用loaders处理它们，最后打包为浏览器可识别的资源（js.png.css等）
-运行环境1、npm2、node.js
-源码解析webpack.config.js12345678910111213141516171819202">
-<meta property="og:updated_time" content="2017-03-17T06:18:06.549Z">
+<meta property="og:description" content="初始webpackWebpack是模块打包机、把你的项目当做一个整体，通过一个给定的主文件（如：main.js），Webpack将从这个文件开始找到你的项目的所有依赖文件，使用loaders处理它们，最后打包为浏览器可识别的资源（js.png.css等）">
+<meta property="og:updated_time" content="2017-03-17T06:35:45.281Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Webpack 1.X 打包教程">
-<meta name="twitter:description" content="初始webpackWebpack是模块打包机、把你的项目当做一个整体，通过一个给定的主文件（如：main.js），Webpack将从这个文件开始找到你的项目的所有依赖文件，使用loaders处理它们，最后打包为浏览器可识别的资源（js.png.css等）
-运行环境1、npm2、node.js
-源码解析webpack.config.js12345678910111213141516171819202">
+<meta name="twitter:description" content="初始webpackWebpack是模块打包机、把你的项目当做一个整体，通过一个给定的主文件（如：main.js），Webpack将从这个文件开始找到你的项目的所有依赖文件，使用loaders处理它们，最后打包为浏览器可识别的资源（js.png.css等）">
 
 
 
@@ -378,6 +372,7 @@
 
       
         <h2 id="初始webpack"><a href="#初始webpack" class="headerlink" title="初始webpack"></a>初始webpack</h2><p>Webpack是模块打包机、把你的项目当做一个整体，通过一个给定的主文件（如：main.js），Webpack将从这个文件开始找到你的项目的所有依赖文件，使用loaders处理它们，最后打包为浏览器可识别的资源（js.png.css等）</p>
+<a id="more"></a>
 <h2 id="运行环境"><a href="#运行环境" class="headerlink" title="运行环境"></a>运行环境</h2><p>1、npm<br>2、node.js</p>
 <h2 id="源码解析"><a href="#源码解析" class="headerlink" title="源码解析"></a>源码解析</h2><h3 id="webpack-config-js"><a href="#webpack-config-js" class="headerlink" title="webpack.config.js"></a>webpack.config.js</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div></pre></td><td class="code"><pre><div class="line">var webpack = require(<span class="string">'webpack'</span>)</div><div class="line">var path    = require(<span class="string">'path'</span>)</div><div class="line">var CleanWebpackPlugin = require(<span class="string">'clean-webpack-plugin'</span>)</div><div class="line">var ManifestPlugin = require(<span class="string">'webpack-manifest-plugin'</span>)</div><div class="line">var ExtractTextPlugin = require(<span class="string">'extract-text-webpack-plugin'</span>)</div><div class="line">//判断开发环境还是生产环境</div><div class="line"><span class="built_in">let</span> isProduction  = process.env.NODE_ENV === <span class="string">'development'</span> ? <span class="literal">false</span> : <span class="literal">true</span>   </div><div class="line">//设置为<span class="literal">false</span>——开发环境    // <span class="built_in">return</span> <span class="literal">true</span>;  //设置为<span class="literal">true</span>——生产环境</div><div class="line">console.log(<span class="string">'isProduction'</span>, isProduction)</div><div class="line"></div><div class="line"><span class="built_in">let</span> plugins = []</div><div class="line"><span class="keyword">if</span>(isProduction)&#123;</div><div class="line">   plugins.push(</div><div class="line">    new CleanWebpackPlugin([<span class="string">'build'</span>])</div><div class="line">  )</div><div class="line">  plugins.push(</div><div class="line">    new ManifestPlugin(&#123;filename: <span class="string">'manifest.json'</span>, publicPath: <span class="string">'/assets/'</span>&#125;)</div><div class="line">  )</div><div class="line">  plugins.push(</div><div class="line">    new ExtractTextPlugin(<span class="string">"[name]-[hash].css"</span>)</div><div class="line">  )</div><div class="line">&#125;</div><div class="line">module.exports = &#123;</div><div class="line">  devtool: isProduction ? null : <span class="string">'cheap-module-eval-source-map'</span>,</div><div class="line"></div><div class="line">  entry:&#123;</div><div class="line">    app:[<span class="string">"./src/main.js"</span>]</div><div class="line">  &#125;,</div><div class="line">  output: &#123;</div><div class="line">    path: path.resolve(__dirname, <span class="string">"build"</span>),</div><div class="line">    filename: isProduction?<span class="string">"[name]-[hash].main.bundle.js"</span>:<span class="string">"main.bundle.js"</span>,</div><div class="line">    publicPath: <span class="string">"/assets/"</span>,</div><div class="line">  &#125;,</div><div class="line"></div><div class="line">  module: &#123;</div><div class="line">    loaders: [</div><div class="line">      &#123;  </div><div class="line">        <span class="built_in">test</span>: /\.vue$/,   </div><div class="line">        exclude: /node_modules/,  </div><div class="line">        loader: <span class="string">'vue-loader'</span>  </div><div class="line">      &#125;,</div><div class="line">      &#123;</div><div class="line">        <span class="built_in">test</span>: /\.js$/,</div><div class="line">        exclude: /node_modules/,</div><div class="line">        loader: <span class="string">'babel'</span>,//在webpack的module部分的loaders里进行配置即可</div><div class="line">        query: &#123;</div><div class="line">          presets: [<span class="string">'es2015'</span>]</div><div class="line">        &#125;</div><div class="line">      &#125;,</div><div class="line">      &#123;</div><div class="line">        <span class="built_in">test</span>: /\.css$/,</div><div class="line">        loader: ExtractTextPlugin.extract(<span class="string">'style'</span>, <span class="string">'css?modules!postcss'</span>)</div><div class="line">      &#125;</div><div class="line">    ]</div><div class="line">  &#125;,</div><div class="line">  postcss: [</div><div class="line">    require(<span class="string">'autoprefixer'</span>)//调用autoprefixer插件</div><div class="line">  ],</div><div class="line">  plugins:plugins</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h3 id="server-js"><a href="#server-js" class="headerlink" title="server.js"></a>server.js</h3><pre><code class="bash">var webpack = require(<span class="string">'webpack'</span>)
@@ -553,6 +548,24 @@ server.listen(8080)
         
 
         
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://feifeiyum.github.io/" title="MacTalk" target="_blank">MacTalk</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="feifeiyum的博客" title="Title" target="_blank">Title</a>
+                </li>
+              
+            </ul>
+          </div>
         
 
         
