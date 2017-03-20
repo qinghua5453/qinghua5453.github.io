@@ -87,19 +87,16 @@
 
 
 
-<meta name="description" content="此插件主要是避免写繁杂的@media来响应式布局，可以通过加载页面(事件:pageshow)和刷新页面(事件:resize),通过js改变字体大小。只需要设置跟元素html的fontSize即可。
-reflesh函数 这里以iphone 6的屏幕尺寸为基准12345function refreshRem() &amp;#123;           var width = docEl.getBoundin">
+<meta name="description" content="此插件主要是避免写繁杂的@media来响应式布局，可以通过加载页面(事件:pageshow)和刷新页面(事件:resize),通过js改变字体大小。只需要设置跟元素html的fontSize即可。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="响应式布局用rem代替@media">
 <meta property="og:url" content="http://yoursite.com/2017/03/17/响应式布局用rem代替-media/index.html">
 <meta property="og:site_name" content="QingHua5453 の Blog">
-<meta property="og:description" content="此插件主要是避免写繁杂的@media来响应式布局，可以通过加载页面(事件:pageshow)和刷新页面(事件:resize),通过js改变字体大小。只需要设置跟元素html的fontSize即可。
-reflesh函数 这里以iphone 6的屏幕尺寸为基准12345function refreshRem() &amp;#123;           var width = docEl.getBoundin">
-<meta property="og:updated_time" content="2017-03-20T02:16:35.567Z">
+<meta property="og:description" content="此插件主要是避免写繁杂的@media来响应式布局，可以通过加载页面(事件:pageshow)和刷新页面(事件:resize),通过js改变字体大小。只需要设置跟元素html的fontSize即可。">
+<meta property="og:updated_time" content="2017-03-20T02:18:22.391Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="响应式布局用rem代替@media">
-<meta name="twitter:description" content="此插件主要是避免写繁杂的@media来响应式布局，可以通过加载页面(事件:pageshow)和刷新页面(事件:resize),通过js改变字体大小。只需要设置跟元素html的fontSize即可。
-reflesh函数 这里以iphone 6的屏幕尺寸为基准12345function refreshRem() &amp;#123;           var width = docEl.getBoundin">
+<meta name="twitter:description" content="此插件主要是避免写繁杂的@media来响应式布局，可以通过加载页面(事件:pageshow)和刷新页面(事件:resize),通过js改变字体大小。只需要设置跟元素html的fontSize即可。">
 
 
 
@@ -367,6 +364,7 @@ reflesh函数 这里以iphone 6的屏幕尺寸为基准12345function refreshRem(
 
       
         <p>此插件主要是避免写繁杂的@media来响应式布局，可以通过加载页面(事件:pageshow)和刷新页面(事件:resize),通过js改变字体大小。只需要设置跟元素html的fontSize即可。</p>
+<a id="more"></a>
 <h2 id="reflesh函数-这里以iphone-6的屏幕尺寸为基准"><a href="#reflesh函数-这里以iphone-6的屏幕尺寸为基准" class="headerlink" title="reflesh函数 这里以iphone 6的屏幕尺寸为基准"></a>reflesh函数 这里以iphone 6的屏幕尺寸为基准</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">function</span> <span class="function"><span class="title">refreshRem</span></span>() &#123;</div><div class="line">           var width = docEl.getBoundingClientRect().width;</div><div class="line">           var rem = width / 37.5; // 将屏幕宽度分成10份， 1份为1rem</div><div class="line">           docEl.style.fontSize = rem + <span class="string">'px'</span>;</div><div class="line">        &#125;</div></pre></td></tr></table></figure>
 <p>整个插件比较简单，所以就直接贴出源码了</p>
 <h2 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">(<span class="keyword">function</span>(win) &#123;</div><div class="line">        var doc = win.document;</div><div class="line">        var docEl = doc.documentElement;</div><div class="line">        var tid;</div><div class="line">        <span class="keyword">function</span> <span class="function"><span class="title">refreshRem</span></span>() &#123;</div><div class="line">           var width = docEl.getBoundingClientRect().width;</div><div class="line">           var rem = width / 37.5; // 将屏幕宽度分成10份， 1份为1rem</div><div class="line">           docEl.style.fontSize = rem + <span class="string">'px'</span>;</div><div class="line">        &#125;</div><div class="line">        win.addEventListener(<span class="string">'resize'</span>, <span class="function"><span class="title">function</span></span>() &#123;</div><div class="line">           clearTimeout(tid);</div><div class="line">           tid = <span class="built_in">set</span>Timeout(refreshRem, 300);</div><div class="line">        &#125;, <span class="literal">false</span>);</div><div class="line">        win.addEventListener(<span class="string">'pageshow'</span>, <span class="keyword">function</span>(e) &#123;</div><div class="line">           <span class="keyword">if</span> (e.persisted) &#123;</div><div class="line">              clearTimeout(tid);</div><div class="line">              tid = <span class="built_in">set</span>Timeout(refreshRem, 300);</div><div class="line">           &#125;</div><div class="line">        &#125;, <span class="literal">false</span>);</div><div class="line">        refreshRem();</div><div class="line">     &#125;)(window);</div></pre></td></tr></table></figure>
