@@ -87,16 +87,16 @@
 
 
 
-<meta name="description" content="js的原型链一直困惑我很久，虽然以前弄懂了，但总觉得没理解透彻。在写js插件的时候，总是一头雾水，今天突然茅舍顿开。其实写插件的时候无非就是构造一个对象，里面传参，传回调函数。对象里面添加属性和方法，属性一般写在构造函数里面，方法一般写在原型链的方法里面，属性和回调函数都可以在原型链的方法里面进行读取和修改。写个小demo如下。">
+<meta name="description" content="今天恍然大悟的理解的es6的promise回调模式，之前一直被自己项目里面的request的then回调方法所迷惑，其实他们是两个不同的概念，同时理解了return语法放在function里面的更深层次的意义。做几个简单的小示例吧。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="prototype">
-<meta property="og:url" content="http://yoursite.com/2017/03/22/prototype/index.html">
+<meta property="og:title" content="promise">
+<meta property="og:url" content="http://yoursite.com/2017/04/01/promise/index.html">
 <meta property="og:site_name" content="QingHua5453 の Blog">
-<meta property="og:description" content="js的原型链一直困惑我很久，虽然以前弄懂了，但总觉得没理解透彻。在写js插件的时候，总是一头雾水，今天突然茅舍顿开。其实写插件的时候无非就是构造一个对象，里面传参，传回调函数。对象里面添加属性和方法，属性一般写在构造函数里面，方法一般写在原型链的方法里面，属性和回调函数都可以在原型链的方法里面进行读取和修改。写个小demo如下。">
-<meta property="og:updated_time" content="2017-03-22T03:47:16.461Z">
+<meta property="og:description" content="今天恍然大悟的理解的es6的promise回调模式，之前一直被自己项目里面的request的then回调方法所迷惑，其实他们是两个不同的概念，同时理解了return语法放在function里面的更深层次的意义。做几个简单的小示例吧。">
+<meta property="og:updated_time" content="2017-04-01T09:47:54.494Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="prototype">
-<meta name="twitter:description" content="js的原型链一直困惑我很久，虽然以前弄懂了，但总觉得没理解透彻。在写js插件的时候，总是一头雾水，今天突然茅舍顿开。其实写插件的时候无非就是构造一个对象，里面传参，传回调函数。对象里面添加属性和方法，属性一般写在构造函数里面，方法一般写在原型链的方法里面，属性和回调函数都可以在原型链的方法里面进行读取和修改。写个小demo如下。">
+<meta name="twitter:title" content="promise">
+<meta name="twitter:description" content="今天恍然大悟的理解的es6的promise回调模式，之前一直被自己项目里面的request的then回调方法所迷惑，其实他们是两个不同的概念，同时理解了return语法放在function里面的更深层次的意义。做几个简单的小示例吧。">
 
 
 
@@ -124,13 +124,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/03/22/prototype/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/04/01/promise/"/>
 
 
 
 
 
-  <title> prototype | QingHua5453 の Blog </title>
+  <title> promise | QingHua5453 の Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -267,7 +267,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/22/prototype/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/01/promise/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="QingHua5453">
@@ -288,7 +288,7 @@
             
             
               
-                prototype
+                promise
               
             
           </h1>
@@ -303,8 +303,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-22T11:15:08+08:00">
-                2017-03-22
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-01T17:16:02+08:00">
+                2017-04-01
               </time>
             
 
@@ -326,8 +326,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/plugin/" itemprop="url" rel="index">
-                    <span itemprop="name">plugin</span>
+                  <a href="/categories/es6/" itemprop="url" rel="index">
+                    <span itemprop="name">es6</span>
                   </a>
                 </span>
 
@@ -344,8 +344,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/03/22/prototype/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/22/prototype/" itemprop="commentCount"></span>
+                <a href="/2017/04/01/promise/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/04/01/promise/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -371,10 +371,12 @@
       
 
       
-        <p>js的原型链一直困惑我很久，虽然以前弄懂了，但总觉得没理解透彻。在写js插件的时候，总是一头雾水，今天突然茅舍顿开。其实写插件的时候无非就是构造一个对象，里面传参，传回调函数。对象里面添加属性和方法，属性一般写在构造函数里面，方法一般写在原型链的方法里面，属性和回调函数都可以在原型链的方法里面进行读取和修改。写个小demo如下。</p>
+        <p>今天恍然大悟的理解的es6的promise回调模式，之前一直被自己项目里面的request的then回调方法所迷惑，其实他们是两个不同的概念，同时理解了return语法放在function里面的更深层次的意义。做几个简单的小示例吧。</p>
 <a id="more"></a>
-<h2 id="源码"><a href="#源码" class="headerlink" title="源码"></a>源码</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">var Load = <span class="keyword">function</span>(name,age,cb)&#123;</div><div class="line">        <span class="keyword">if</span>(name!=undefined&amp;&amp; typeof name !=<span class="string">'string'</span>)&#123;</div><div class="line">          throw <span class="string">'name must be string'</span></div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span>(age!=undefined&amp;&amp; typeof age !=<span class="string">'number'</span>)&#123;</div><div class="line">          throw <span class="string">'age must be number'</span></div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span>(cb !=undefined &amp;&amp; typeof cb !=<span class="string">'function'</span>)&#123;</div><div class="line">          throw <span class="string">'cb must be function'</span></div><div class="line">        &#125;</div><div class="line">        var self = this</div><div class="line">         // 向load 对象新增加两个属性 和一个回调函数</div><div class="line">         // 新增加的属性可以在原型链函数中随意读取并修改</div><div class="line">         // 新增加的回调函数也可以在原型链中随意读取并修改</div><div class="line">        self.name = name</div><div class="line">        self.age  = age</div><div class="line">        cb &amp;&amp; (self.cb = cb)</div><div class="line"></div><div class="line">        self.cb &amp;&amp; self.cb()</div><div class="line">        this.reset()</div><div class="line">&#125;</div><div class="line"></div><div class="line">Load.prototype.reset = <span class="keyword">function</span>(cb)&#123;</div><div class="line">        var self = this</div><div class="line">        // 修改构造函数的回调cb函数</div><div class="line">        cb &amp;&amp; (self.cb = cb)</div><div class="line">        self.cb &amp;&amp; self.cb()</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="调用函数"><a href="#调用函数" class="headerlink" title="调用函数"></a>调用函数</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">var load = new Load(<span class="string">'zj'</span>,28,<span class="function"><span class="title">function</span></span>()&#123;</div><div class="line">      console.log(55555)</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<h2 id="示例1-简单的promise回调"><a href="#示例1-简单的promise回调" class="headerlink" title="示例1 简单的promise回调"></a>示例1 简单的promise回调</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">let</span> promise = new Promise((resolve,reject)=&gt;&#123;</div><div class="line">    <span class="built_in">let</span> resp = &#123;<span class="string">'name'</span>:<span class="string">'123'</span>,<span class="string">'age'</span>:675&#125;</div><div class="line">    <span class="built_in">let</span> err  = &#123;<span class="string">'err'</span>:<span class="string">'错误信息'</span>&#125;</div><div class="line">    <span class="keyword">if</span>(typeof(resp)!=<span class="string">'undefined'</span>)&#123;</div><div class="line">        <span class="built_in">set</span>Timeout(<span class="function"><span class="title">function</span></span>()&#123;</div><div class="line">           resolve(resp)</div><div class="line">        &#125;,5000)</div><div class="line">    &#125;<span class="keyword">else</span>&#123;</div><div class="line">       reject(err)</div><div class="line">    &#125;</div><div class="line">  &#125;)</div><div class="line">  示例讲解：</div><div class="line"></div><div class="line">  <span class="keyword">if</span>(a)&#123;</div><div class="line">     resolve(resp)</div><div class="line">     成功后的回调函数，并且这个回调函数会在构造函数的原型链的<span class="keyword">then</span>函数中执行Promise.prototype.then()</div><div class="line">  &#125;<span class="keyword">else</span>&#123;</div><div class="line">     reject(err)</div><div class="line">     失败后的回调函数,并且这个回调函数会在构造函数的原型链的<span class="keyword">then</span>函数中执行Promise.prototype.catch()</div><div class="line">  &#125;</div><div class="line">  所以回调函数来了：</div><div class="line">  promise.then(resp=&gt;&#123;</div><div class="line">    console.log(resp)</div><div class="line">  &#125;).catch(err=&gt;&#123;</div><div class="line">    console.log(err)</div><div class="line">  &#125;)</div><div class="line">  稍微改造一下函数，见示例2</div></pre></td></tr></table></figure>
+<h2 id="示例2-附带return函数用法"><a href="#示例2-附带return函数用法" class="headerlink" title="示例2 附带return函数用法"></a>示例2 附带return函数用法</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">var <span class="built_in">test</span>Fun = <span class="function"><span class="title">function</span></span>()&#123;</div><div class="line">    <span class="built_in">return</span> new Promise((resolve,reject)=&gt;&#123;</div><div class="line">      <span class="built_in">let</span> resp = &#123;<span class="string">'name'</span>:<span class="string">'123'</span>,<span class="string">'age'</span>:675&#125;</div><div class="line">      <span class="built_in">let</span> err  = &#123;<span class="string">'err'</span>:<span class="string">'错误信息'</span>&#125;</div><div class="line">      <span class="keyword">if</span>(typeof(resp)!=<span class="string">'undefined'</span>)&#123;</div><div class="line">          <span class="built_in">set</span>Timeout(<span class="function"><span class="title">function</span></span>()&#123;</div><div class="line">             resolve(resp)</div><div class="line">          &#125;,5000)</div><div class="line">      &#125;<span class="keyword">else</span>&#123;</div><div class="line">         reject(err)</div><div class="line">      &#125;</div><div class="line">    &#125;)</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  回调来了</div><div class="line">  <span class="built_in">test</span>Fun().then(resp=&gt;&#123;</div><div class="line">      console.log(resp)</div><div class="line">  &#125;).catch(err=&gt;&#123;</div><div class="line">      console.log(err)</div><div class="line">  &#125;)</div><div class="line">  代码解释：</div><div class="line">  这里巧妙的运用了<span class="built_in">return</span> 关键字，在执行函数<span class="built_in">test</span>Fun()的时候，<span class="built_in">return</span>给一个实例化的new Promise</div><div class="line">  可以如示例1代码理解 即<span class="built_in">test</span>Fun() 是实例化new Promise的一个变量</div></pre></td></tr></table></figure>
+<h2 id="示例3-附带request-ajax-插件用法"><a href="#示例3-附带request-ajax-插件用法" class="headerlink" title="示例3 附带request(ajax)插件用法"></a>示例3 附带request(ajax)插件用法</h2><p>源码<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">export</span> <span class="keyword">function</span> <span class="function"><span class="title">loadDoctorProfile</span></span>() &#123;</div><div class="line">	<span class="built_in">return</span> new Promise ((resolve, reject) =&gt; &#123;</div><div class="line">		reqwest(&#123;</div><div class="line">			headers: store.getters.headers,</div><div class="line">			url: localhost+<span class="string">'/api/doctor/profile/'</span>,</div><div class="line">		&#125;).then(resp =&gt; &#123;</div><div class="line">			resolve(resp)</div><div class="line">		&#125;).fail(err =&gt; &#123;</div><div class="line">			reject(null)</div><div class="line">		&#125;)</div><div class="line">  &#125;)</div><div class="line">&#125;</div><div class="line">注意request的<span class="keyword">then</span>并非promise的<span class="keyword">then</span>函数，只是恰好相同而已</div></pre></td></tr></table></figure></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>实际Promise 就是一个构造函数，里面封装了then和catch等方法，一个是成功回调resolve，一个失败回调reject仅此而已。并没什么高深的。</p>
 
       
     </div>
@@ -411,8 +413,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/03/17/响应式布局用rem代替-media/" rel="next" title="响应式布局用rem代替@media">
-                <i class="fa fa-chevron-left"></i> 响应式布局用rem代替@media
+              <a href="/2017/03/22/prototype/" rel="next" title="prototype">
+                <i class="fa fa-chevron-left"></i> prototype
               </a>
             
           </div>
@@ -420,10 +422,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/04/01/promise/" rel="prev" title="promise">
-                promise <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -449,8 +447,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2017/03/22/prototype/"
-           data-title="prototype" data-url="http://yoursite.com/2017/03/22/prototype/">
+      <div class="ds-thread" data-thread-key="2017/04/01/promise/"
+           data-title="promise" data-url="http://yoursite.com/2017/04/01/promise/">
       </div>
     
   </div>
@@ -561,7 +559,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#源码"><span class="nav-number">1.</span> <span class="nav-text">源码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#调用函数"><span class="nav-number">2.</span> <span class="nav-text">调用函数</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#示例1-简单的promise回调"><span class="nav-number">1.</span> <span class="nav-text">示例1 简单的promise回调</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#示例2-附带return函数用法"><span class="nav-number">2.</span> <span class="nav-text">示例2 附带return函数用法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#示例3-附带request-ajax-插件用法"><span class="nav-number">3.</span> <span class="nav-text">示例3 附带request(ajax)插件用法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
 
           </div>
