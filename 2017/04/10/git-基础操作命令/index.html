@@ -87,16 +87,16 @@
 
 
 
-<meta name="description" content="Self learning Self improvement">
+<meta name="description" content="git 常见的操作命令，如果用的多还好，用的不多，每次用的时候都需要去百度，觉得特别麻烦，所以今天特意整理下简单实用而且常用的git bash命令">
 <meta property="og:type" content="article">
-<meta property="og:title" content="slider">
-<meta property="og:url" content="http://yoursite.com/2017/03/17/slider/index.html">
+<meta property="og:title" content="git 基础操作命令">
+<meta property="og:url" content="http://yoursite.com/2017/04/10/git-基础操作命令/index.html">
 <meta property="og:site_name" content="QingHua5453 の Blog">
-<meta property="og:description" content="Self learning Self improvement">
-<meta property="og:updated_time" content="2017-03-17T07:54:25.716Z">
+<meta property="og:description" content="git 常见的操作命令，如果用的多还好，用的不多，每次用的时候都需要去百度，觉得特别麻烦，所以今天特意整理下简单实用而且常用的git bash命令">
+<meta property="og:updated_time" content="2017-04-10T09:51:22.476Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="slider">
-<meta name="twitter:description" content="Self learning Self improvement">
+<meta name="twitter:title" content="git 基础操作命令">
+<meta name="twitter:description" content="git 常见的操作命令，如果用的多还好，用的不多，每次用的时候都需要去百度，觉得特别麻烦，所以今天特意整理下简单实用而且常用的git bash命令">
 
 
 
@@ -124,13 +124,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/03/17/slider/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/04/10/git-基础操作命令/"/>
 
 
 
 
 
-  <title> slider | QingHua5453 の Blog </title>
+  <title> git 基础操作命令 | QingHua5453 の Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -283,7 +283,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/17/slider/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/10/git-基础操作命令/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="QingHua5453">
@@ -304,7 +304,7 @@
             
             
               
-                slider
+                git 基础操作命令
               
             
           </h1>
@@ -319,8 +319,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-17T15:51:29+08:00">
-                2017-03-17
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-10T16:47:05+08:00">
+                2017-04-10
               </time>
             
 
@@ -342,8 +342,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/plugin/" itemprop="url" rel="index">
-                    <span itemprop="name">plugin</span>
+                  <a href="/categories/git/" itemprop="url" rel="index">
+                    <span itemprop="name">git</span>
                   </a>
                 </span>
 
@@ -360,8 +360,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/03/17/slider/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/17/slider/" itemprop="commentCount"></span>
+                <a href="/2017/04/10/git-基础操作命令/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/04/10/git-基础操作命令/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -387,7 +387,13 @@
       
 
       
-        
+        <p>git 常见的操作命令，如果用的多还好，用的不多，每次用的时候都需要去百度，觉得特别麻烦，所以今天特意整理下简单实用而且常用的git bash命令</p>
+<a id="more"></a>
+<h2 id="创建新分支"><a href="#创建新分支" class="headerlink" title="创建新分支"></a>创建新分支</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">创建本地分支并未切换</div><div class="line">git branch branchName</div><div class="line">创建本地分支并切换到这个分支</div><div class="line">git checkout -b branchName</div><div class="line">将刚创建的本地分支同步到远程remote上,此时会自动同步远程的master分支的code</div><div class="line">git push origin branchName:branchName</div></pre></td></tr></table></figure>
+<h2 id="删除分支"><a href="#删除分支" class="headerlink" title="删除分支"></a>删除分支</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">删除本地分支 (删除分支的时候，不能处于该分支)</div><div class="line">git branch -D branchName</div><div class="line">删除远程分支 (删除分支的时候，不能处于该分支)</div><div class="line">git push origin :branchName</div></pre></td></tr></table></figure>
+<h2 id="合并分支"><a href="#合并分支" class="headerlink" title="合并分支"></a>合并分支</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">将远程分支合并到本地该分支</div><div class="line">git merge --no-ff origin/remote-branchName</div></pre></td></tr></table></figure>
+<h2 id="代码回滚"><a href="#代码回滚" class="headerlink" title="代码回滚"></a>代码回滚</h2><h3 id="本地回滚"><a href="#本地回滚" class="headerlink" title="本地回滚"></a>本地回滚</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">方法(1)</div><div class="line">回滚到commit-id之后提交的版本</div><div class="line">git reset --hard commit-id</div><div class="line">将最近1次提交的回滚</div><div class="line">git reset --hard HEAD~1或 git reset --hard HEAD</div><div class="line">将最近n次提交的回滚</div><div class="line">git reset --hard HEAD~n</div><div class="line">方法(2)</div><div class="line">回滚本地所有修改的文件，并且还未缓存到index的文件</div><div class="line">git checkout .</div><div class="line">回滚本地某文件，并且还未缓存到index的文件</div><div class="line">git checkout &lt;fileName&gt;</div></pre></td></tr></table></figure>
+<h3 id="远程回滚"><a href="#远程回滚" class="headerlink" title="远程回滚"></a>远程回滚</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">远程回滚比较难，当部署后发现代码出错，需要回滚到某一个commit前的正确代码，请看一下操作</div><div class="line">原理：将本地分支回退到某commit，删除远程分支，再重新push本地分支到远程，再发布</div><div class="line">1、git checkout the_branch //切换到某分支，因为我们一般不要去删除master分支</div><div class="line">2、git pull</div><div class="line">3、git branch the_branch_backup // 备份本地分支当前情况</div><div class="line">4、git reset --hard the_commit_id //将the_branch 本地回滚到the_commit_id版本</div><div class="line">5、git push origin :the_branch //删除远程 the_branch</div><div class="line">6、git push origin the_branch_backup:the_branch //将本地的分支重新建立远程分支</div><div class="line">7、git push origin :the_branch_backup //如果前面成功了，删除备份分支</div><div class="line"></div><div class="line">远程回滚确实有点复杂，目前还没去真正试验过，回头好好去练习下。</div></pre></td></tr></table></figure>
       
     </div>
 
@@ -423,8 +429,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/03/17/loading-wait/" rel="next" title="loading-wait">
-                <i class="fa fa-chevron-left"></i> loading-wait
+              <a href="/2017/04/01/promise/" rel="next" title="promise">
+                <i class="fa fa-chevron-left"></i> promise
               </a>
             
           </div>
@@ -433,8 +439,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/03/17/lazy-loading/" rel="prev" title="lazy-loading">
-                lazy-loading <i class="fa fa-chevron-right"></i>
+              <a href="/2017/04/10/http请求-结合ajax-基础难点剖析/" rel="prev" title="http请求 结合ajax 基础难点剖析">
+                http请求 结合ajax 基础难点剖析 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -461,8 +467,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2017/03/17/slider/"
-           data-title="slider" data-url="http://yoursite.com/2017/03/17/slider/">
+      <div class="ds-thread" data-thread-key="2017/04/10/git-基础操作命令/"
+           data-title="git 基础操作命令" data-url="http://yoursite.com/2017/04/10/git-基础操作命令/">
       </div>
     
   </div>
@@ -486,8 +492,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/uploads/me.gif"
@@ -554,6 +569,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#创建新分支"><span class="nav-number">1.</span> <span class="nav-text">创建新分支</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#删除分支"><span class="nav-number">2.</span> <span class="nav-text">删除分支</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#合并分支"><span class="nav-number">3.</span> <span class="nav-text">合并分支</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码回滚"><span class="nav-number">4.</span> <span class="nav-text">代码回滚</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#本地回滚"><span class="nav-number">4.1.</span> <span class="nav-text">本地回滚</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#远程回滚"><span class="nav-number">4.2.</span> <span class="nav-text">远程回滚</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
