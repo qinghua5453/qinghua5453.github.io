@@ -87,16 +87,16 @@
 
 
 
-<meta name="description" content="Self learning Self improvement">
+<meta name="description" content="今天突然看懂了原型链，以前总是很迷糊，所以一定得写下来，不然可能过段时间又给忘记了，特别是proto和prototype的关系以及谁谁谁又是谁谁谁的原型。不多说，直接在chorme打印台打印几个例子说明下。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="slider">
-<meta property="og:url" content="http://yoursite.com/2017/03/17/slider/index.html">
+<meta property="og:title" content="__proto__">
+<meta property="og:url" content="http://yoursite.com/2017/04/17/proto/index.html">
 <meta property="og:site_name" content="QingHua5453 の Blog">
-<meta property="og:description" content="Self learning Self improvement">
-<meta property="og:updated_time" content="2017-03-17T07:54:25.716Z">
+<meta property="og:description" content="今天突然看懂了原型链，以前总是很迷糊，所以一定得写下来，不然可能过段时间又给忘记了，特别是proto和prototype的关系以及谁谁谁又是谁谁谁的原型。不多说，直接在chorme打印台打印几个例子说明下。">
+<meta property="og:updated_time" content="2017-04-17T08:07:31.858Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="slider">
-<meta name="twitter:description" content="Self learning Self improvement">
+<meta name="twitter:title" content="__proto__">
+<meta name="twitter:description" content="今天突然看懂了原型链，以前总是很迷糊，所以一定得写下来，不然可能过段时间又给忘记了，特别是proto和prototype的关系以及谁谁谁又是谁谁谁的原型。不多说，直接在chorme打印台打印几个例子说明下。">
 
 
 
@@ -124,13 +124,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/03/17/slider/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/04/17/proto/"/>
 
 
 
 
 
-  <title> slider | QingHua5453 の Blog </title>
+  <title> __proto__ | QingHua5453 の Blog </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -283,7 +283,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/17/slider/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/17/proto/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="QingHua5453">
@@ -304,7 +304,7 @@
             
             
               
-                slider
+                __proto__
               
             
           </h1>
@@ -319,8 +319,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-17T15:51:29+08:00">
-                2017-03-17
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-17T14:12:19+08:00">
+                2017-04-17
               </time>
             
 
@@ -360,8 +360,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2017/03/17/slider/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/17/slider/" itemprop="commentCount"></span>
+                <a href="/2017/04/17/proto/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/04/17/proto/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -387,7 +387,11 @@
       
 
       
-        
+        <p>今天突然看懂了原型链，以前总是很迷糊，所以一定得写下来，不然可能过段时间又给忘记了，特别是<strong>proto</strong>和prototype的关系以及谁谁谁又是谁谁谁的原型。不多说，直接在chorme打印台打印几个例子说明下。</p>
+<a id="more"></a>
+<p>先说下js的一些基础知识吧，什么是基础类型（原始类型），什么是引用类型</p>
+<h2 id="基础类型"><a href="#基础类型" class="headerlink" title="基础类型"></a>基础类型</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">有五种基础类型，分别是（通常用小写，切莫与引用类型搞混淆了比如Number等）</div><div class="line">undefined - 如果变量是 Undefined 类型的</div><div class="line">boolean   - 如果变量是 Boolean 类型的</div><div class="line">number    - 如果变量是 Number 类型的</div><div class="line">string    - 如果变量是 String 类型的</div><div class="line">object    - 如果变量是一种引用类型或 Null 类型的</div><div class="line"></div><div class="line">所对应的检测的js方法是typeof,注意object类型当时typeof null === object 或者typeof 任何一种引用类型 ===object,所以为了区分是何种引用类型，还有一种方法是instanceof, A instanceof B 意思是A是B实例化的一个对象，或者是A的继承B所有的属性和方法，下面讲了引用对象后会详细讲此方法</div></pre></td></tr></table></figure>
+<h2 id="引用类型"><a href="#引用类型" class="headerlink" title="引用类型"></a>引用类型</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div></pre></td><td class="code"><pre><div class="line">Object对象、Boolean 对象、Number 对象、String 对象 </div><div class="line"></div><div class="line">ps ：这里的摘抄自w3c的内容，Date和Array对象去哪里了？他们不是引用类型吗？鄙人认为是的呢！！！</div><div class="line"></div><div class="line">Boolean、Number、String 对象都是从Object 对象继承而来，即它们都在其自己的原型链上能找到构造函数Object的prototype属性</div><div class="line"></div><div class="line">instanceof 运算符用来测试一个对象在其原型链中是否存在一个构造函数的 prototype 属性。</div><div class="line"></div><div class="line">String instanceof Object</div><div class="line"><span class="literal">true</span></div><div class="line"></div><div class="line">String.prototype instanceof Object</div><div class="line"><span class="literal">true</span></div><div class="line"></div><div class="line">先在chrome 控制台打印几个东西，再做说明</div><div class="line"></div><div class="line">var str = new String(<span class="string">'dh'</span>)</div><div class="line"></div><div class="line">str.__proto__ === String.prototype</div><div class="line"><span class="literal">true</span></div><div class="line"></div><div class="line">String.prototype.__proto__ === Object.prototype</div><div class="line"><span class="literal">true</span></div><div class="line"></div><div class="line">Object.prototype.__proto__ === null</div><div class="line"><span class="literal">true</span></div><div class="line"></div><div class="line">个人理解 __proto__ 某对象的__proto__属性总是指向该对象原型链向上一级最近一级上的某对象的prototype即原型对象</div><div class="line"></div><div class="line">因为Boolean、Number、String 对象都是从Object 对象继承而来，所以掌握了Object的方法，其他对象也就掌握了，因为他们都拥有同样的方法</div><div class="line"></div><div class="line">var obj = &#123;<span class="string">'name'</span>:<span class="string">'zj'</span>&#125;</div><div class="line">判断对象是否有某个特定的属性。必须用字符串指定该属性 hasOwnProperty(property)</div><div class="line"></div><div class="line">obj.hasOwnProperty(<span class="string">'name'</span>)</div><div class="line"><span class="literal">true</span></div><div class="line"></div><div class="line">判断该对象是否为另一个对象的原型。IsPrototypeOf(object)</div><div class="line"></div><div class="line">Object.prototype.isPrototypeOf(obj)</div><div class="line"><span class="literal">true</span></div></pre></td></tr></table></figure>
       
     </div>
 
@@ -423,8 +427,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/03/17/loading-wait/" rel="next" title="loading-wait">
-                <i class="fa fa-chevron-left"></i> loading-wait
+              <a href="/2017/04/10/git-基础操作命令/" rel="next" title="git 基础操作命令">
+                <i class="fa fa-chevron-left"></i> git 基础操作命令
               </a>
             
           </div>
@@ -432,10 +436,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/03/17/lazy-loading/" rel="prev" title="lazy-loading">
-                lazy-loading <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -461,8 +461,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="2017/03/17/slider/"
-           data-title="slider" data-url="http://yoursite.com/2017/03/17/slider/">
+      <div class="ds-thread" data-thread-key="2017/04/17/proto/"
+           data-title="__proto__" data-url="http://yoursite.com/2017/04/17/proto/">
       </div>
     
   </div>
@@ -486,8 +486,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/uploads/me.gif"
@@ -554,6 +563,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基础类型"><span class="nav-number">1.</span> <span class="nav-text">基础类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#引用类型"><span class="nav-number">2.</span> <span class="nav-text">引用类型</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
