@@ -1,0 +1,802 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="之前公司开发公众号的时候用的打包工具是webpack，虽然早在1年前，同事就跟前端组搭建了一个gulp+express的一个环境，但始终没去看如何搭建的，花了一天时间发现其实也不难。不得不说很多知识都是通的，得学会触类旁通。在学习gulp中其实也咯噔了一下，总是不理解pipe这个动词，因为node原生的东西没怎么搞清楚就直接去搞express了，无奈又把原生node看了下，其实我也不知道我是第几次">
+<meta property="og:type" content="article">
+<meta property="og:title" content="gulp">
+<meta property="og:url" content="http://yoursite.com/2017/04/19/gulp/index.html">
+<meta property="og:site_name" content="QingHua5453 の Blog">
+<meta property="og:description" content="之前公司开发公众号的时候用的打包工具是webpack，虽然早在1年前，同事就跟前端组搭建了一个gulp+express的一个环境，但始终没去看如何搭建的，花了一天时间发现其实也不难。不得不说很多知识都是通的，得学会触类旁通。在学习gulp中其实也咯噔了一下，总是不理解pipe这个动词，因为node原生的东西没怎么搞清楚就直接去搞express了，无奈又把原生node看了下，其实我也不知道我是第几次">
+<meta property="og:updated_time" content="2017-04-19T07:18:23.677Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="gulp">
+<meta name="twitter:description" content="之前公司开发公众号的时候用的打包工具是webpack，虽然早在1年前，同事就跟前端组搭建了一个gulp+express的一个环境，但始终没去看如何搭建的，花了一天时间发现其实也不难。不得不说很多知识都是通的，得学会触类旁通。在学习gulp中其实也咯噔了一下，总是不理解pipe这个动词，因为node原生的东西没怎么搞清楚就直接去搞express了，无奈又把原生node看了下，其实我也不知道我是第几次">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/04/19/gulp/"/>
+
+
+
+
+
+  <title> gulp | QingHua5453 の Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">QingHua5453 の Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-plugin">
+          <a href="/categories/plugin" rel="section">
+            
+            plugin
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-webpack">
+          <a href="/categories/webpack" rel="section">
+            
+            webpack
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-gulp">
+          <a href="/categories/gulp" rel="section">
+            
+            gulp
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-vue">
+          <a href="/categories/vue" rel="section">
+            
+            vue
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-express">
+          <a href="/categories/express" rel="section">
+            
+            express
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-es6">
+          <a href="/categories/es6" rel="section">
+            
+            es6
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-git">
+          <a href="/categories/git" rel="section">
+            
+            git
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-webserver">
+          <a href="/categories/webServer" rel="section">
+            
+            webServer
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/04/19/gulp/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="QingHua5453">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/me.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="QingHua5453 の Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                gulp
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-19T14:41:21+08:00">
+                2017-04-19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/gulp/" itemprop="url" rel="index">
+                    <span itemprop="name">gulp</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/04/19/gulp/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/04/19/gulp/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>之前公司开发公众号的时候用的打包工具是webpack，虽然早在1年前，同事就跟前端组搭建了一个gulp+express的一个环境，但始终没去看如何搭建的，花了一天时间发现其实也不难。不得不说很多知识都是通的，得学会触类旁通。<br>在学习gulp中其实也咯噔了一下，总是不理解pipe这个动词，因为node原生的东西没怎么搞清楚就直接去搞express了，无奈又把原生node看了下，其实我也不知道我是第几次看原生node了，但这次真的好像收获不少。不多说了，<br>直接上源码吧，然后会说明留下的坑，以及当时遇到的困难。</p>
+<a id="more"></a>
+<h2 id="依赖"><a href="#依赖" class="headerlink" title="依赖"></a>依赖</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">   var gulp = require(<span class="string">'gulp'</span>)</div><div class="line">var watch = require(<span class="string">'gulp-watch'</span>)      //watch</div><div class="line">var runSequence = require(<span class="string">'run-sequence'</span>) //task callback run sequence</div><div class="line">var nodemon = require(<span class="string">'gulp-nodemon'</span>)   //自动刷新</div><div class="line">var less = require(<span class="string">'gulp-less'</span>)   //编译less</div><div class="line">var concat = require(<span class="string">'gulp-concat'</span>)  //合并文件</div><div class="line">var minifyCss = require(<span class="string">'gulp-minify-css'</span>)  //压缩css</div><div class="line">var uglify    = require(<span class="string">'gulp-uglify'</span>)   //压缩js</div><div class="line">var rename  = require(<span class="string">'gulp-rename'</span>)   //重命名</div><div class="line">var htmlmin = require(<span class="string">'gulp-htmlmin'</span>)  //html压缩</div><div class="line">var imagemin = require(<span class="string">'gulp-imagemin'</span>) //图片压缩</div><div class="line">var pngquant = require(<span class="string">'imagemin-pngquant'</span>) // 深度压缩图片(png)</div><div class="line">var cache = require(<span class="string">'gulp-cache'</span>)  //缓存被压缩的图片</div><div class="line">var notify = require(<span class="string">'gulp-notify'</span>)     //提示信息</div></pre></td></tr></table></figure>
+<pre><code>以上就是gulpfile.js 所需要的依赖
+
+1、gulp-watch 
+
+这个依赖本不准备用的，但gulp原生的watch死活都监听不了新增文件这个修改
+
+js、less、css的修改、新增、删除 gulp-watch 都能监听到，唯独image的删除不能监听，修改和新增能监听
+
+2、gulp-imagemin
+
+图片压缩后，针对jpg格式基本0压缩，所以又特意引入了针对png的深度压缩依赖imagemin-pngquant
+
+3、notify
+
+这个提示信息可用可不用，特别是img 压缩比较慢，会在控制台打印出很多东西，一看就烦躁
+
+以上我说的都是我留下的坑，以及碰到的一些疑惑和困难。再说说两个重要的依赖
+
+4、run-sequence
+
+顾名思义 是执行任务队列，在gulp的某个task的callback中顺序执行。
+
+5、gulp-nodemon
+
+这个依赖大概的意思是当我们执行命令gulp的时候，会开启一个我们的webserver的一个文件，同时可以自动监听到修改。
+
+我并没有完全搞懂这个。
+</code></pre><h2 id="主要源码"><a href="#主要源码" class="headerlink" title="主要源码"></a>主要源码</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">   var asset = &#123;</div><div class="line">	less:<span class="string">'./src/less/**/*.less'</span>,</div><div class="line">	css :<span class="string">'./src/css/**/*.css'</span>,</div><div class="line">	js  :<span class="string">'./src/js/**/*.js'</span>,</div><div class="line">	html:<span class="string">'./src/html/**/*.html'</span>,</div><div class="line">	images:<span class="string">'./src/images/**/*'</span></div><div class="line">&#125;</div><div class="line">// less---&gt; css---&gt;concat---&gt;min.css---&gt;rename</div><div class="line">gulp.task(<span class="string">'less'</span>,<span class="function"><span class="title">function</span></span>()&#123;</div><div class="line">   gulp.src(asset.less)</div><div class="line">       .pipe(less())</div><div class="line">       .pipe(concat(<span class="string">'index.css'</span>))</div><div class="line">       .pipe(minifyCss())</div><div class="line">       .pipe(rename(<span class="string">'index.min.css'</span>))</div><div class="line">       .pipe(gulp.dest(<span class="string">'dist/css'</span>))</div><div class="line">       // .pipe(notify(<span class="string">'less task is ok'</span>))</div><div class="line">&#125;)</div><div class="line">// css---&gt;concat---&gt;min.css---&gt;rename</div><div class="line">gulp.task(<span class="string">'css'</span>,<span class="function"><span class="title">function</span></span>()&#123;</div><div class="line">	gulp.src(asset.css)</div><div class="line">        .pipe(concat(<span class="string">'index.css'</span>))</div><div class="line">        .pipe(minifyCss())</div><div class="line">        .pipe(rename(<span class="string">'index.min.css'</span>))</div><div class="line">        .pipe(gulp.dest(<span class="string">'dist/css'</span>))</div><div class="line">        // .pipe(notify(<span class="string">'css task is ok'</span>))</div><div class="line">&#125;)</div><div class="line">// js ---&gt;concat---&gt;uglify----&gt;rename</div><div class="line">gulp.task(<span class="string">'js'</span>,<span class="function"><span class="title">function</span></span>()&#123;</div><div class="line">	gulp.src(asset.js)</div><div class="line">	    .pipe(concat(<span class="string">'common.js'</span>))</div><div class="line">	    .pipe(uglify())</div><div class="line">	    .pipe(rename(<span class="string">'common.min.js'</span>))</div><div class="line">	    .pipe(gulp.dest(<span class="string">'dist/js'</span>))</div><div class="line">	    // .pipe(notify(<span class="string">'js task is ok'</span>))</div><div class="line">&#125;)</div><div class="line">// uglify html</div><div class="line">gulp.task(<span class="string">'html'</span>,<span class="function"><span class="title">function</span></span>()&#123;</div><div class="line">	gulp.src(asset.html)</div><div class="line">	    .pipe(htmlmin(&#123;collapseWhitespace: <span class="literal">true</span>&#125;))</div><div class="line">	    .pipe(gulp.dest(<span class="string">'dist/html'</span>))</div><div class="line">	    // .pipe(notify(<span class="string">'html task is ok'</span>))</div><div class="line">&#125;)</div><div class="line">// uglify images</div><div class="line">gulp.task(<span class="string">'images'</span>,<span class="function"><span class="title">function</span></span>()&#123;</div><div class="line">	gulp.src(asset.images)</div><div class="line">	    .pipe(cache(imagemin(&#123;</div><div class="line">				interlaced: <span class="literal">true</span>,</div><div class="line">				progressive: <span class="literal">true</span>,</div><div class="line">				optimizationLevel: 5,</div><div class="line">				svgoPlugins: [&#123;removeViewBox: <span class="literal">true</span>&#125;],</div><div class="line">				use:[pngquant()]</div><div class="line">	     &#125;)))</div><div class="line">	    .pipe(gulp.dest(<span class="string">'dist/images'</span>))</div><div class="line">&#125;)</div><div class="line">// watch</div><div class="line">gulp.task(<span class="string">'watch'</span>,<span class="function"><span class="title">function</span></span>()&#123;</div><div class="line">	watch([asset.less,asset.css,asset.js,asset.html,asset.images],&#123;</div><div class="line">          events: [<span class="string">'add'</span>, <span class="string">'change'</span>, <span class="string">'unlink'</span>]</div><div class="line">	&#125;,<span class="keyword">function</span>(events)&#123;</div><div class="line">		console.log(<span class="string">'File '</span> + events.path + <span class="string">' was '</span> + <span class="string">' running tasks ...'</span>)</div><div class="line">		runSequence(<span class="string">'less'</span>,<span class="string">'css'</span>,<span class="string">'js'</span>,<span class="string">'html'</span>,<span class="string">'images'</span>)</div><div class="line">	&#125;)</div><div class="line">&#125;)</div><div class="line">// var watcher = gulp.watch([<span class="string">'asset.less'</span>,<span class="string">'asset.css'</span>,<span class="string">'asset.js'</span>,<span class="string">'asset.html'</span>],[<span class="string">'less'</span>,<span class="string">'css'</span>,<span class="string">'js'</span>,<span class="string">'html'</span>])</div><div class="line"></div><div class="line">// watcher.on(<span class="string">'change'</span>,<span class="keyword">function</span>(event)&#123;</div><div class="line">//   console.log(<span class="string">'File '</span> + event.path + <span class="string">' was '</span> + event.type + <span class="string">', running tasks...'</span>);</div><div class="line">// &#125;)</div><div class="line"></div><div class="line">// server</div><div class="line">gulp.task(<span class="string">'server'</span>,<span class="function"><span class="title">function</span></span>()&#123;</div><div class="line">     nodemon(&#123;</div><div class="line">         script:<span class="string">'index.js'</span>,</div><div class="line">         ext   :<span class="string">'html js css'</span>,</div><div class="line">         ignore:[<span class="string">'src/*'</span>],</div><div class="line">         env   :&#123;<span class="string">'NODE_ENV'</span>: <span class="string">'development'</span>&#125;</div><div class="line">     &#125;)</div><div class="line">&#125;)</div><div class="line">gulp.task(<span class="string">'default'</span>,[<span class="string">'less'</span>,<span class="string">'css'</span>,<span class="string">'js'</span>,<span class="string">'html'</span>,<span class="string">'images'</span>,<span class="string">'watch'</span>,<span class="string">'server'</span>])</div></pre></td></tr></table></figure>
+<p>说明：上面被隐掉的watcher就是gulp原生的监听事件，可能是没设置好，所以在add的时候没法监听</p>
+<p>才改用gulp-watch的</p>
+<h2 id="启动一个express-webserver"><a href="#启动一个express-webserver" class="headerlink" title="启动一个express webserver"></a>启动一个express webserver</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">  </div><div class="line">  // index.js</div><div class="line">var express = require(<span class="string">'express'</span>)</div><div class="line">var serveIndex = require(<span class="string">'serve-index'</span>)</div><div class="line">var path = require(<span class="string">'path'</span>)</div><div class="line">var app = express()</div><div class="line"></div><div class="line"></div><div class="line">app.use(<span class="string">'/'</span>, serveIndex(path.join(__dirname, <span class="string">'src'</span>)))</div><div class="line">app.use(express.static(path.join(__dirname, <span class="string">'src'</span>)))</div><div class="line"></div><div class="line">app.listen(3000,<span class="keyword">function</span>(err)&#123;</div><div class="line">	<span class="keyword">if</span>(err) <span class="built_in">return</span></div><div class="line">	console.log(<span class="string">'Example app listening at port 3000'</span>)</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<p>这个光设置express的官方教程上的app.use(express.static(path.join(__dirname, ‘src’)))</p>
+<p>是不行的，设置它只能输入完整的url才能访问到本地的静态目录，因此引入了serve-index 依赖</p>
+<h2 id="结束语"><a href="#结束语" class="headerlink" title="结束语"></a>结束语</h2><p>看似简单的gulp，其实在搭建环境的时候还是会遇到各种问题，得亏当初的同事走的时候搭建的那个环境，在百度+官网+同事的demo上才</p>
+<p>得以顺利的完成，目前实现的功能基本可以够前端组来使用了。其实在学习新东西的时候真的会遇到各种问题，百度能解决的最好，百度解决不了，</p>
+<p>有时候只能咔半天，或留坑了。哎~~~！！！</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/04/17/js面向对象继承的几种方式/" rel="next" title="js面向对象继承的几种方式">
+                <i class="fa fa-chevron-left"></i> js面向对象继承的几种方式
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/04/19/gulp/"
+           data-title="gulp" data-url="http://yoursite.com/2017/04/19/gulp/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/me.gif"
+               alt="QingHua5453" />
+          <p class="site-author-name" itemprop="name">QingHua5453</p>
+           
+              <p class="site-description motion-element" itemprop="description">Self learning Self improvement</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/">
+                <span class="site-state-item-count">17</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="https://feifeiyum.github.io/" title="feifeiyum" target="_blank">feifeiyum</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#依赖"><span class="nav-number">1.</span> <span class="nav-text">依赖</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#主要源码"><span class="nav-number">2.</span> <span class="nav-text">主要源码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#启动一个express-webserver"><span class="nav-number">3.</span> <span class="nav-text">启动一个express webserver</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结束语"><span class="nav-number">4.</span> <span class="nav-text">结束语</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">QingHua5453</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"qinghua5453"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+</body>
+</html>
